@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: flask-chat-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn run:app"
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:///db.sqlite3  # Or your PostgreSQL URL if using Render DB
+    autoDeploy: true
+    region: oregon
+    plan: free
+    branch: main  # or whatever branch you deploy from
+    pullRequestPreviewsEnabled: false
+    webSocketSupport: true
